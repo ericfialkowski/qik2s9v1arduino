@@ -45,7 +45,7 @@
 #define MOTOR0COASTPACKET 0x86
 #define MOTOR1COASTPACKET 0x87
 #define FWVERSIONPACKET 0x81
-#define ERRORPACKET 0x81
+#define ERRORPACKET 0x82
 
 /*
 	Bit location for the different errors
