@@ -53,26 +53,58 @@ void CompactQik2s9v1::begin()
 
 void CompactQik2s9v1::motor0Forward(uint8_t speed)
 {
-	sendByte(MOTOR0FORWARDPACKET);
-	sendByte(speed);
+	if ( speed > 127 )
+	{
+		sendByte(MOTOR0FORWARDFASTPACKET);
+		sendByte(speed-127);	
+	}
+	else
+	{
+		sendByte(MOTOR0FORWARDPACKET);
+		sendByte(speed);
+	}
 }
 
 void CompactQik2s9v1::motor1Forward(uint8_t speed)
 {
-	sendByte(MOTOR1FORWARDPACKET);
-	sendByte(speed);
+	if ( speed > 127 )
+	{
+		sendByte(MOTOR1FORWARDFASTPACKET);
+		sendByte(speed-127);	
+	}
+	else
+	{
+		sendByte(MOTOR1FORWARDPACKET);
+		sendByte(speed);
+	}
 }
 
 void CompactQik2s9v1::motor0Reverse(uint8_t speed)
-{
-	sendByte(MOTOR0REVERSEPACKET);
-	sendByte(speed);
+{	
+	if ( speed > 127 )
+	{
+		sendByte(MOTOR0REVERSEFASTPACKET);
+		sendByte(speed-127);	
+	}
+	else
+	{
+		sendByte(MOTOR0REVERSEPACKET);
+		sendByte(speed);
+	}
 }
 
 void CompactQik2s9v1::motor1Reverse(uint8_t speed)
 {
-	sendByte(MOTOR1REVERSEPACKET);
-	sendByte(speed);
+	if ( speed > 127 )
+	{
+		sendByte(MOTOR1REVERSEFASTPACKET);
+		sendByte(speed-127);	
+	}
+	else
+	{
+		sendByte(MOTOR1REVERSEPACKET);
+		sendByte(speed);
+	}
 }
 
 void CompactQik2s9v1::motor0Coast()
@@ -166,6 +198,66 @@ bool CompactQik2s9v1::hasTimeoutError()
 bool CompactQik2s9v1::hasTimeoutError(bool fetchError = false)
 {
 	return errorBitSet(TIMEOUTERRORBIT, fetchError);
+}
+
+uint8_t CompactQik2s9v1::getDeviceID()
+{
+	sendByte(GETCONFIG);
+	sendByte(CONFIG_DEVICEID);
+	uint8_t id = readByte();
+	return id;
+}
+
+bool CompactQik2s9v1::setDeviceID(uint8_t id)
+{
+	sendByte(SETCONFIG);
+	sendByte(CONFIG_DEVICEID);
+	sendByte(id);
+	uint8_t success = readByte();
+	return (success == CONFIG_OK);
+}
+
+uint8_t CompactQik2s9v1::getPWMParameter()
+{
+	sendByte(GETCONFIG);
+	sendByte(CONFIG_PWM);
+	uint8_t param = readByte();
+	return param;
+}
+
+bool CompactQik2s9v1::setPWMParameter(uint8_t pwmParam)
+{
+	sendByte(SETCONFIG);
+	sendByte(CONFIG_PWM);
+	sendByte(pwmParam);
+	uint8_t success = readByte();
+	return (success == CONFIG_OK);
+}
+
+bool CompactQik2s9v1::getShutdownOnError()
+{
+	sendByte(GETCONFIG);
+	sendByte(CONFIG_SHUTDOWN);
+	uint8_t rtn = readByte();
+	return (rtn == 1);
+}
+
+bool CompactQik2s9v1::setShutdownOnError(bool shutdown)
+{
+	sendByte(SETCONFIG);
+	sendByte(CONFIG_SHUTDOWN);
+	sendByte(shutdown ? 1 : 0);
+	
+	uint8_t success = readByte();
+	return (success == CONFIG_OK);
+}
+
+uint8_t CompactQik2s9v1::getSerialTimeout()
+{
+	sendByte(GETCONFIG);
+	sendByte(CONFIG_TIMEOUT);
+	uint8_t rtn = readByte();
+	return rtn;
 }
 
 /*

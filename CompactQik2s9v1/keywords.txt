@@ -16,3 +16,9 @@ hasFrameError	KEYWORD2
 hasCRCError	KEYWORD2
 hasFormatError	KEYWORD2
 hasTimeoutError	KEYWORD2
+getDeviceID	KEYWORD2
+setDeviceID	KEYWORD2
+getPWMParameter	KEYWORD2
+getShutdownOnError	KEYWORD2
+getSerialTimeout	KEYWORD2
+setShutdownOnError	KEYWORD2

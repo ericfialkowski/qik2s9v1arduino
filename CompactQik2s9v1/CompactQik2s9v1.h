@@ -39,13 +39,21 @@
 */
 #define INITIALPACKET 0xAA
 #define MOTOR0FORWARDPACKET 0x88
-#define MOTOR1FORWARDPACKET 0x8C
+#define MOTOR0FORWARDFASTPACKET 0x89
 #define MOTOR0REVERSEPACKET 0x8A
+#define MOTOR0REVERSEFASTPACKET 0x8B
+
+#define MOTOR1FORWARDPACKET 0x8C
+#define MOTOR1FORWARDFASTPACKET 0x8D
 #define MOTOR1REVERSEPACKET 0x8E
+#define MOTOR1REVERSEFASTPACKET 0x8F
+
 #define MOTOR0COASTPACKET 0x86
 #define MOTOR1COASTPACKET 0x87
 #define FWVERSIONPACKET 0x81
 #define ERRORPACKET 0x82
+#define GETCONFIG 0x83
+#define SETCONFIG 0x84
 
 /*
 	Bit location for the different errors
@@ -56,6 +64,17 @@
 #define FORMATERRORBIT 6
 #define TIMEOUTERRORBIT 7
 
+#define CONFIG_DEVICEID 0
+#define CONFIG_PWM 1
+#define CONFIG_SHUTDOWN 2
+#define CONFIG_TIMEOUT 3
+
+#define CONFIG_PWM_HF7 0
+#define CONFIG_PWM_HF8 1
+#define CONFIG_PWM_LF7 2
+#define CONFIG_PWM_LF8 3
+
+#define CONFIG_OK 0
 
 class CompactQik2s9v1 {
 public:
@@ -95,6 +114,16 @@ public:
 	bool hasTimeoutError();
 	bool hasTimeoutError(bool fetchError);
 
+	uint8_t getDeviceID();
+	bool setDeviceID(uint8_t id);
+	
+	uint8_t getPWMParameter();
+	bool setPWMParameter(uint8_t pwmParam);
+	
+	bool getShutdownOnError();
+	bool setShutdownOnError(bool shutdown);
+	
+	uint8_t getSerialTimeout();
 	
 private:
 	NewSoftSerial *_serial;
