@@ -64,15 +64,30 @@
 #define FORMATERRORBIT 6
 #define TIMEOUTERRORBIT 7
 
+/*
+	Constants for configuration
+*/
 #define CONFIG_DEVICEID 0
 #define CONFIG_PWM 1
 #define CONFIG_SHUTDOWN 2
 #define CONFIG_TIMEOUT 3
 
+/*
+	PWM config values
+	HF/LF = High/Low Frequency
+	7/8 = 7/8 bits
+*/
 #define CONFIG_PWM_HF7 0
 #define CONFIG_PWM_HF8 1
 #define CONFIG_PWM_LF7 2
 #define CONFIG_PWM_LF8 3
+/*
+  PWM constants defined by frequency
+*/
+#define CONFIG_PWM_31_5KHZ 0
+#define CONFIG_PWM_15_7KHZ 1
+#define CONFIG_PWM_7_8KHZ 2
+#define CONFIG_PWM_3_9KHZ 3
 
 #define CONFIG_OK 0
 
