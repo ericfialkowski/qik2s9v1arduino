@@ -22,7 +22,6 @@
 
 NewSoftSerial mySerial =  NewSoftSerial(rxPin, txPin);
 CompactQik2s9v1 motor = CompactQik2s9v1(&mySerial,rstPin);
-byte fwVersion = -1;
 
 void setup()  
 {
