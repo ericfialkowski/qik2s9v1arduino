@@ -16,6 +16,11 @@
 #include <CompactQik2s9v1.h>
 #include <NewSoftSerial.h>
 
+/*
+	Important Note:
+		The rxPin goes to the Qik's "TX" pin
+		The txPin goes to the Qik's "RX" pin
+*/
 #define rxPin 3
 #define txPin 4
 #define rstPin 5
